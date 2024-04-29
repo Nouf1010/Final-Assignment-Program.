@@ -1,3 +1,5 @@
+#importing the inheritance file so that we can use the class guest
+from Inheritance import *
 #Aggregation 1 (Event + Guest)
 class Event:
     '''Class to represent an event'''
@@ -64,3 +66,18 @@ class Event:
 
     def get_guest_list(self):
         return self.__guest_list
+
+ #Add guest class here
+class Guest(Person):
+    '''Class to represent a guest'''
+    # Constructor
+    def __init__(self, nameP, phone_numP, emailP, guestID):
+        super().__init__(nameP, phone_numP, emailP)  # inheriting from person class
+        self.__guestID = guestID
+
+    # Setters and getters
+    def set_guestID(self, guestID):
+        self.__guestID = guestID
+
+    def get_guestID(self):
+        return self.__guestID
