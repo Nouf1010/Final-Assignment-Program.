@@ -139,3 +139,43 @@ class Venue:
 
     def get_max_guests(self):
         return self.__max_guests
+
+class Supplier:
+    '''Class to represent a supplier'''
+    # Constructor
+    def __init__(self, supID, sup_name, sup_phone_num, sup_address):
+        self.__supID = supID
+        self.__sup_name = sup_name
+        self.__sup_phone_num = sup_phone_num
+        self.__sup_address = sup_address
+
+    #Setters and getters
+    def set_supID(self, supID):
+        self.__supID = supID
+
+    def get_supID(self):
+        return self.__supID
+
+    def set_sup_name(self, sup_name):
+        self.__sup_name = sup_name
+
+    def get_sup_name(self):
+        return self.__sup_name
+
+    def set_sup_phone_num(self, sup_phone_num):
+        self.__sup_phone_num = sup_phone_num
+
+    def get_sup_phone_num(self):
+        return self.__sup_phone_num
+
+    def set_sup_address(self, sup_address):
+        self.__sup_address = sup_address
+
+    def get_sup_address(self):
+        return self.__sup_address
+
+    def set_service_list(self, service_list):
+        self.__service_list = service_list
+
+    def get_service_list(self):
+        return self.__service_list
