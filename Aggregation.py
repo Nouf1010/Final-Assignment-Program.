@@ -21,3 +21,46 @@ class Event:
             self.__guest_list.remove(guest)
         else:
             print("Guest not found in the guest list.")
+
+    #Setters and getters
+    def set_eventID(self, eventID):
+        self.__eventID = eventID
+
+    def get_eventID(self):
+        return self.__eventID
+
+    def set_type(self, type):
+        self.__type = type
+
+    def get_type(self):
+        return self.__type
+
+    def set_date(self, date):
+        self.__date = date
+
+    def get_date(self):
+        return self.__date
+
+    def set_time(self, time):
+        self.__time = time
+
+    def get_time(self):
+        return self.__time
+
+    def set_duration(self, duration):
+        self.__duration = duration
+
+    def get_duration(self):
+        return self.__duration
+
+    def set_venue(self, venue):
+        self.__venue = venue
+
+    def get_venue(self):
+        return self.__venue
+
+    def set_guest_list(self, guest_list):
+        self.__guest_list = guest_list
+
+    def get_guest_list(self):
+        return self.__guest_list
