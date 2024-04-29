@@ -81,3 +81,24 @@ class Guest(Person):
 
     def get_guestID(self):
         return self.__guestID
+
+#Aggregation 2 (Venue + Supplier)
+class Venue:
+    '''Class to represent a venue'''
+    #Constructor
+    def __init__(self, venueID, venue_name, venue_address, venue_contact_num, min_guests, max_guests):
+        self.__venueID = venueID
+        self.__venue_name = venue_name
+        self.__venue_address = venue_address
+        self.__venue_contact_num = venue_contact_num
+        self.__min_guests = min_guests
+        self.__max_guests = max_guests
+        self.__suppliers = []  # List to hold supplier objects
+
+    # Method to add a supplier
+    def add_supplier(self, supplier):
+        self.__suppliers.append(supplier)
+
+    # Method to remove a supplier
+    def remove_supplier(self, supplier):
+        self.__suppliers.remove(supplier)
