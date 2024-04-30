@@ -68,3 +68,18 @@ class Employee(Person):
 
     def get_role(self):
         return self.__role
+
+
+class Guest(Person):
+    '''Class to represent a guest'''
+    #Constructor
+    def __init__(self, nameP, phone_numP, emailP, guestID):
+        super().__init__(nameP, phone_numP, emailP) #inheriting from person class
+        self.__guestID = guestID
+
+    #Setters and getters
+    def set_guestID(self, guestID):
+        self.__guestID = guestID
+
+    def get_guestID(self):
+        return self.__guestID
