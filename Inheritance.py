@@ -46,3 +46,25 @@ class Client(Person):
 
     def get_budget(self):
         return self.__budget
+
+
+class Employee(Person):
+    '''Class to represent an employee'''
+    #Constructor
+    def __init__(self, nameP, phone_numP, emailP, empID, role):
+        super().__init__(nameP, phone_numP, emailP) #inheriting from person class
+        self.__empID = empID
+        self.__role = role
+
+    #Setters and getters
+    def set_empID(self, empID):
+        self.__empID = empID
+
+    def get_empID(self):
+        return self.__empID
+
+    def set_role(self, role):
+        self.__role = role
+
+    def get_role(self):
+        return self.__role
