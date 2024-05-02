@@ -34,87 +34,116 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         self.add_client_window = None  # Window for adding client
 
     def create_widgets(self):
-    #EMPLOYEE BUTTONS
-    # Create buttons for adding, deleting, modifying, and displaying employee details
-    add_employee_button = tk.Button(self, text="Add Employee", command=self.add_employee)  # Button to add an employee
-    add_employee_button.pack()  # Adding the button to the application window
+        # EMPLOYEE BUTTONS
+        # Create buttons for adding, deleting, modifying, and displaying employee details
+        add_employee_button = tk.Button(self, text="Add Employee", command=self.add_employee)  # Button to add an employee
+        add_employee_button.pack()  # Adding the button to the application window
 
-    delete_employee_button = tk.Button(self, text="Delete Employee", command=self.delete_employee)  # Button to delete an employee
-    delete_employee_button.pack()  # Adding the button to the application window
+        delete_employee_button = tk.Button(self, text="Delete Employee", command=self.delete_employee)  # Button to delete an employee
+        delete_employee_button.pack()  # Adding the button to the application window
 
-    modify_employee_button = tk.Button(self, text="Modify Employee", command=self.modify_employee)  # Button to modify an employee
-    modify_employee_button.pack()  # Adding the button to the application window
+        modify_employee_button = tk.Button(self, text="Modify Employee", command=self.modify_employee)  # Button to modify an employee
+        modify_employee_button.pack()  # Adding the button to the application window
 
-    display_employee_button = tk.Button(self, text="Display Employee", command=self.display_employee)  # Button to display employee details
-    display_employee_button.pack()  # Adding the button to the application window
+        display_employee_button = tk.Button(self, text="Display Employee", command=self.display_employee)  # Button to display employee details
+        display_employee_button.pack()  # Adding the button to the application window
 
-    #EVENT BUTTONS
-    # Create buttons for adding, deleting, modifying, and displaying event details
-    add_event_button = tk.Button(self, text="Add Event", command=self.add_event)  # Button to add an event
-    add_event_button.pack()  # Adding the button to the application window
+        # EVENT BUTTONS
+        # Create buttons for adding, deleting, modifying, and displaying event details
+        add_event_button = tk.Button(self, text="Add Event", command=self.add_event)  # Button to add an event
+        add_event_button.pack()  # Adding the button to the application window
 
-    delete_event_button = tk.Button(self, text="Delete Event", command=self.delete_event)  # Button to delete an event
-    delete_event_button.pack()  # Adding the button to the application window
+        delete_event_button = tk.Button(self, text="Delete Event", command=self.delete_event)  # Button to delete an event
+        delete_event_button.pack()  # Adding the button to the application window
 
-    modify_event_button = tk.Button(self, text="Modify Event", command=self.modify_event)  # Button to modify an event
-    modify_event_button.pack()  # Adding the button to the application window
+        modify_event_button = tk.Button(self, text="Modify Event", command=self.modify_event)  # Button to modify an event
+        modify_event_button.pack()  # Adding the button to the application window
 
-    display_event_button = tk.Button(self, text="Display Event", command=self.display_event)  # Button to display event details
-    display_event_button.pack()  # Adding the button to the application window
+        display_event_button = tk.Button(self, text="Display Event", command=self.display_event)  # Button to display event details
+        display_event_button.pack()  # Adding the button to the application window
 
-    #GUEST BUTTONS
-    # Create buttons for adding, deleting, modifying, and displaying guest details
-    add_guest_button = tk.Button(self, text="Add Guest", command=self.add_guest)  # Button to add a guest
-    add_guest_button.pack()  # Adding the button to the application window
+        # GUEST BUTTONS
+        # Create buttons for adding, deleting, modifying, and displaying guest details
+        add_guest_button = tk.Button(self, text="Add Guest", command=self.add_guest)  # Button to add a guest
+        add_guest_button.pack()  # Adding the button to the application window
 
-    delete_guest_button = tk.Button(self, text="Delete Guest", command=self.delete_guest)  # Button to delete a guest
-    delete_guest_button.pack()  # Adding the button to the application window
+        delete_guest_button = tk.Button(self, text="Delete Guest", command=self.delete_guest)  # Button to delete a guest
+        delete_guest_button.pack()  # Adding the button to the application window
 
-    modify_guest_button = tk.Button(self, text="Modify Guest", command=self.modify_guest)  # Button to modify a guest
-    modify_guest_button.pack()  # Adding the button to the application window
+        modify_guest_button = tk.Button(self, text="Modify Guest", command=self.modify_guest)  # Button to modify a guest
+        modify_guest_button.pack()  # Adding the button to the application window
 
-    display_guest_button = tk.Button(self, text="Display Guest", command=self.display_guest)  # Button to display guest details
-    display_guest_button.pack()  # Adding the button to the application window
+        display_guest_button = tk.Button(self, text="Display Guest", command=self.display_guest)  # Button to display guest details
+        display_guest_button.pack()  # Adding the button to the application window
 
-    #SUPPLIER BUTTONS
-    # Create buttons for adding, deleting, modifying, and displaying supplier details
-    add_supplier_button = tk.Button(self, text="Add Supplier", command=self.add_supplier)  # Button to add a supplier
-    add_supplier_button.pack()  # Adding the button to the application window
+        # SUPPLIER BUTTONS
+        # Create buttons for adding, deleting, modifying, and displaying supplier details
+        add_supplier_button = tk.Button(self, text="Add Supplier", command=self.add_supplier)  # Button to add a supplier
+        add_supplier_button.pack()  # Adding the button to the application window
 
-    delete_supplier_button = tk.Button(self, text="Delete Supplier", command=self.delete_supplier)  # Button to delete a supplier
-    delete_supplier_button.pack()  # Adding the button to the application window
+        delete_supplier_button = tk.Button(self, text="Delete Supplier", command=self.delete_supplier)  # Button to delete a supplier
+        delete_supplier_button.pack()  # Adding the button to the application window
 
-    modify_supplier_button = tk.Button(self, text="Modify Supplier", command=self.modify_supplier)  # Button to modify a supplier
-    modify_supplier_button.pack()  # Adding the button to the application window
+        modify_supplier_button = tk.Button(self, text="Modify Supplier", command=self.modify_supplier)  # Button to modify a supplier
+        modify_supplier_button.pack()  # Adding the button to the application window
 
-    display_supplier_button = tk.Button(self, text="Display Supplier", command=self.display_supplier)  # Button to display supplier details
-    display_supplier_button.pack()  # Adding the button to the application window
+        display_supplier_button = tk.Button(self, text="Display Supplier", command=self.display_supplier)  # Button to display supplier details
+        display_supplier_button.pack()  # Adding the button to the application window
 
-    #VENUE BUTTONS
-    # Create buttons for adding, deleting, modifying, and displaying venue details
-    add_venue_button = tk.Button(self, text="Add Venue", command=self.add_venue)  # Button to add a venue
-    add_venue_button.pack()  # Adding the button to the application window
+        # VENUE BUTTONS
+        # Create buttons for adding, deleting, modifying, and displaying venue details
+        add_venue_button = tk.Button(self, text="Add Venue", command=self.add_venue)  # Button to add a venue
+        add_venue_button.pack()  # Adding the button to the application window
 
-    delete_venue_button = tk.Button(self, text="Delete Venue", command=self.delete_venue)  # Button to delete a venue
-    delete_venue_button.pack()  # Adding the button to the application window
+        delete_venue_button = tk.Button(self, text="Delete Venue", command=self.delete_venue)  # Button to delete a venue
+        delete_venue_button.pack()  # Adding the button to the application window
 
-    modify_venue_button = tk.Button(self, text="Modify Venue", command=self.modify_venue)  # Button to modify a venue
-    modify_venue_button.pack()  # Adding the button to the application window
+        modify_venue_button = tk.Button(self, text="Modify Venue", command=self.modify_venue)  # Button to modify a venue
+        modify_venue_button.pack()  # Adding the button to the application window
 
-    display_venue_button = tk.Button(self, text="Display Venue", command=self.display_venue)  # Button to display venue details
-    display_venue_button.pack()  # Adding the button to the application window
+        display_venue_button = tk.Button(self, text="Display Venue", command=self.display_venue)  # Button to display venue details
+        display_venue_button.pack()  # Adding the button to the application window
 
-    #CLIENT BUTTONS
-    # Create buttons for adding, deleting, modifying, and displaying client details
-    add_client_button = tk.Button(self, text="Add Client", command=self.add_client)  # Button to add a client
-    add_client_button.pack()  # Adding the button to the application window
+        # CLIENT BUTTONS
+        # Create buttons for adding, deleting, modifying, and displaying client details
+        add_client_button = tk.Button(self, text="Add Client", command=self.add_client)  # Button to add a client
+        add_client_button.pack()  # Adding the button to the application window
 
-    delete_client_button = tk.Button(self, text="Delete Client", command=self.delete_client)  # Button to delete a client
-    delete_client_button.pack()  # Adding the button to the application window
+        delete_client_button = tk.Button(self, text="Delete Client", command=self.delete_client)  # Button to delete a client
+        delete_client_button.pack()  # Adding the button to the application window
 
-    modify_client_button = tk.Button(self, text="Modify Client", command=self.modify_client)  # Button to modify a client
-    modify_client_button.pack()  # Adding the button to the application window
+        modify_client_button = tk.Button(self, text="Modify Client", command=self.modify_client)  # Button to modify a client
+        modify_client_button.pack()  # Adding the button to the application window
 
-    display_client_button = tk.Button(self, text="Display Client", command=self.display_client)  # Button to display client details
-    display_client_button.pack()  # Adding the button to the application window
+        display_client_button = tk.Button(self, text="Display Client", command=self.display_client)  # Button to display client details
+        display_client_button.pack()  # Adding the button to the application window
+
+
+    def add_employee(self):
+        # Create a new Toplevel window for adding employee details
+        self.add_employee_window = tk.Toplevel(self)
+        self.add_employee_window.title("Add Employee")  # Setting title for the window
+
+        # Label and Entry widgets for employee details
+        tk.Label(self.add_employee_window, text="Name:").grid(row=0, column=0)  # Label for employee name
+        name_entry = tk.Entry(self.add_employee_window)  # Entry field for entering employee name
+        name_entry.grid(row=0, column=1)  # Positioning entry field
+
+        tk.Label(self.add_employee_window, text="Phone Number:").grid(row=1, column=0)  # Label for phone number
+        phone_entry = tk.Entry(self.add_employee_window)  # Entry field for entering phone number
+        phone_entry.grid(row=1, column=1)  # Positioning entry field
+
+        tk.Label(self.add_employee_window, text="Email:").grid(row=2, column=0)  # Label for email
+        email_entry = tk.Entry(self.add_employee_window)  # Entry field for entering email
+        email_entry.grid(row=2, column=1)  # Positioning entry field
+
+        tk.Label(self.add_employee_window, text="Employee ID:").grid(row=3, column=0)  # Label for employee ID
+        emp_id_entry = tk.Entry(self.add_employee_window)  # Entry field for entering employee ID
+        emp_id_entry.grid(row=3, column=1)  # Positioning entry field
+
+        tk.Label(self.add_employee_window, text="Role:").grid(row=4, column=0)  # Label for employee role
+        role_entry = tk.Entry(self.add_employee_window)  # Entry field for entering employee role
+        role_entry.grid(row=4, column=1)  # Positioning entry field
+
+
 
