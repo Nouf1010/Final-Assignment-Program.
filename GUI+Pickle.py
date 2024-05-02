@@ -445,6 +445,94 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
             command=self.delete_event_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+    def modify_event(self):
+        # Create a new Toplevel window for modifying an event
+        self.modify_event_window = tk.Toplevel(self)
+        self.modify_event_window.title("Modify Event")
+
+        # Label and Entry widgets for event ID
+        tk.Label(self.modify_event_window, text="Event ID:").grid(row=0, column=0)
+        event_id_entry = tk.Entry(self.modify_event_window)
+        event_id_entry.grid(row=0, column=1)
+
+        # Function to handle modification of an event
+        def modify_event_inner():
+            # Get the event ID to modify
+            event_id = event_id_entry.get()  # Retrieve the event ID entered by the user
+
+            # Search for the event with the given ID
+            for event in self.events:  # Iterate through the list of events
+                if event.get_eventID() == event_id:  # Check if the event ID matches
+                    # Open a new window to modify event details
+                    modify_window = tk.Toplevel(self.modify_event_window)  # Create a new window
+                    modify_window.title("Modify Event Details")  # Set title for the new window
+
+                    # Label and Entry widgets to display current details
+                    tk.Label(modify_window, text="Type:").grid(row=0, column=0)  # Label for event type
+                    type_entry = tk.Entry(modify_window)  # Entry field for entering event type
+                    type_entry.insert(0, event.get_type())  # Insert current type into the entry field
+                    type_entry.grid(row=0, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Date:").grid(row=1, column=0)  # Label for event date
+                    date_entry = tk.Entry(modify_window)  # Entry field for entering event date
+                    date_entry.insert(0, event.get_date())  # Insert current date into the entry field
+                    date_entry.grid(row=1, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Time:").grid(row=2, column=0)  # Label for event time
+                    time_entry = tk.Entry(modify_window)  # Entry field for entering event time
+                    time_entry.insert(0, event.get_time())  # Insert current time into the entry field
+                    time_entry.grid(row=2, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Duration:").grid(row=3, column=0)  # Label for event duration
+                    duration_entry = tk.Entry(modify_window)  # Entry field for entering event duration
+                    duration_entry.insert(0, event.get_duration())  # Insert current duration into the entry field
+                    duration_entry.grid(row=3, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Venue:").grid(row=4, column=0)  # Label for event venue
+                    venue_entry = tk.Entry(modify_window)  # Entry field for entering event venue
+                    venue_entry.insert(0, event.get_venue())  # Insert current venue into the entry field
+                    venue_entry.grid(row=4, column=1)  # Positioning entry field
+
+                    # Function to handle modification submission
+                    def submit_modification():
+                        # Update the event object with new details
+                        event.set_type(type_entry.get())  # Set new type
+                        event.set_date(date_entry.get())  # Set new date
+                        event.set_time(time_entry.get())  # Set new time
+                        event.set_duration(duration_entry.get())  # Set new duration
+                        event.set_venue(venue_entry.get())  # Set new venue
+
+                        # Update the serialized file (you might want to overwrite it entirely)
+                        with open('events.pkl', 'wb') as file:  # Open the file in write-binary mode
+                            pickle.dump(self.events, file)  # Serialize and write the updated event list to the file
+
+                        # Display success message
+                        messagebox.showinfo("Success",
+                                            "Event details modified successfully")  # Show a success message dialog box
+
+                        # Close the modification window
+                        modify_window.destroy()  # Destroy the window for modifying event details
+
+                    # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit",
+                                              command=submit_modification)  # Button to submit modifications
+                    submit_button.grid(row=5, column=0)  # Positioning the submit button
+
+                    return
+
+            # If event with given ID is not found
+            messagebox.showerror("Error", "Event with the given ID not found")  # Show an error message dialog box
+
+        # Button to modify event
+        modify_button = tk.Button(self.modify_event_window, text="Modify",
+                                  command=modify_event_inner)  # Button to trigger modification
+        modify_button.grid(row=1, column=0)  # Positioning the modify button
+
+        # Button to go back
+        back_button = tk.Button(self.modify_event_window, text="Back",
+                                command=self.modify_event_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
