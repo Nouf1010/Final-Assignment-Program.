@@ -145,5 +145,41 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         role_entry = tk.Entry(self.add_employee_window)  # Entry field for entering employee role
         role_entry.grid(row=4, column=1)  # Positioning entry field
 
+        # Function to handle submission of employee details
+        def submit_employee():
+            # Get values from Entry widgets
+            name = name_entry.get()  # Retrieve the name entered by the user
+            phone = phone_entry.get()  # Retrieve the phone number entered by the user
+            email = email_entry.get()  # Retrieve the email entered by the user
+            emp_id = emp_id_entry.get()  # Retrieve the employee ID entered by the user
+            role = role_entry.get()  # Retrieve the role entered by the user
+
+            # Create an instance of Employee class with provided details
+            employee = Employee(name, phone, email, emp_id, role)  # Create an Employee object
+
+            # Add the employee instance to the list
+            self.employees.append(employee)  # Append the new employee to the list of employees
+
+            # Serialize the employee object and store it in a binary file
+            with open('employees.pkl', 'ab') as file:  # Open the file in binary append mode
+                pickle.dump(employee, file)  # Serialize and write the employee object to the file
+
+            # Display success message
+            messagebox.showinfo("Success", "Employee added successfully")  # Show a success message dialog box
+
+            # Close the Toplevel window
+            self.add_employee_window.destroy()  # Destroy the window for adding an employee
+            # Reset the reference to the window
+            self.add_employee_window = None  # Set the window reference to None to indicate it's closed
+
+        # Button to submit employee details
+        submit_button = tk.Button(self.add_employee_window, text="Submit", command=submit_employee)  # Button to submit employee details
+        submit_button.grid(row=5, column=0)  # Positioning the submit button
+
+        # Button to go back
+        back_button = tk.Button(self.add_employee_window, text="Back", command=self.add_employee_window.destroy)  # Button to close the window
+        back_button.grid(row=5, column=1)  # Positioning the back button
+
+
 
 
