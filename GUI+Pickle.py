@@ -507,15 +507,13 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                             pickle.dump(self.events, file)  # Serialize and write the updated event list to the file
 
                         # Display success message
-                        messagebox.showinfo("Success",
-                                            "Event details modified successfully")  # Show a success message dialog box
+                        messagebox.showinfo("Success","Event details modified successfully")  # Show a success message dialog box
 
                         # Close the modification window
                         modify_window.destroy()  # Destroy the window for modifying event details
 
                     # Button to submit modifications
-                    submit_button = tk.Button(modify_window, text="Submit",
-                                              command=submit_modification)  # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit", command=submit_modification)  # Button to submit modifications
                     submit_button.grid(row=5, column=0)  # Positioning the submit button
 
                     return
@@ -524,13 +522,11 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
             messagebox.showerror("Error", "Event with the given ID not found")  # Show an error message dialog box
 
         # Button to modify event
-        modify_button = tk.Button(self.modify_event_window, text="Modify",
-                                  command=modify_event_inner)  # Button to trigger modification
+        modify_button = tk.Button(self.modify_event_window, text="Modify", command=modify_event_inner)  # Button to trigger modification
         modify_button.grid(row=1, column=0)  # Positioning the modify button
 
         # Button to go back
-        back_button = tk.Button(self.modify_event_window, text="Back",
-                                command=self.modify_event_window.destroy)  # Button to close the window
+        back_button = tk.Button(self.modify_event_window, text="Back", command=self.modify_event_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
 
@@ -561,14 +557,36 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
             messagebox.showerror("Error", "Event with the given ID not found")
 
         # Button to display event details
-        display_button = tk.Button(
-            self.display_event_window, text="Display", command=display_event_action)
+        display_button = tk.Button(self.display_event_window, text="Display", command=display_event_action)
         display_button.grid(row=1, column=0)
 
         # Button to go back
-        back_button = tk.Button(
-            self.display_event_window, text="Back", command=self.display_event_window.destroy)
+        back_button = tk.Button(self.display_event_window, text="Back", command=self.display_event_window.destroy)
         back_button.grid(row=1, column=1)
+
+    #GUEST
+    def add_guest(self):
+        # Create a new Toplevel window for adding guest details
+        self.add_guest_window = tk.Toplevel(self)
+        self.add_guest_window.title("Add Guest")
+
+        # Label and Entry widgets for guest details
+        tk.Label(self.add_guest_window, text="Name:").grid(row=0, column=0)
+        name_entry = tk.Entry(self.add_guest_window)
+        name_entry.grid(row=0, column=1)
+
+        tk.Label(self.add_guest_window, text="Phone Number:").grid(row=1, column=0)
+        phone_entry = tk.Entry(self.add_guest_window)
+        phone_entry.grid(row=1, column=1)
+
+        tk.Label(self.add_guest_window, text="Email:").grid(row=2, column=0)
+        email_entry = tk.Entry(self.add_guest_window)
+        email_entry.grid(row=2, column=1)
+
+        tk.Label(self.add_guest_window, text="Guest ID:").grid(row=3, column=0)
+        guest_id_entry = tk.Entry(self.add_guest_window)
+        guest_id_entry.grid(row=3, column=1)
+
 
 
 
