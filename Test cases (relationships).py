@@ -499,3 +499,59 @@ except ValueError as e:
     print("Error:", e)
 finally:
     print("Execution completed.")
+
+
+#Aggregation 2 (Venue + Supplier) --> done
+
+from Aggregation import Venue  # Importing event class from the aggregation file
+def validate_supplier_phone(phone):
+    return len(phone) == 10 and phone.isdigit()
+
+try:
+    # Creating an instance of Venue with predefined values
+    venueID = "VENUE001"
+    venue_name = "Venue A"
+    venue_address = "Abu Dhabi, Yas Island"
+    venue_contact_num = "0501234561"
+    min_guests = 1
+    max_guests = 200
+
+    venue = Venue(venueID, venue_name, venue_address, venue_contact_num, min_guests, max_guests)
+
+    # Creating instances of Supplier with user inputs
+    num_suppliers = int(input("Enter the number of suppliers: "))
+    for i in range(num_suppliers):
+        print(f"\nSupplier {i+1}:")
+        supID = input("Enter supplier ID: ")
+        sup_name = input("Enter supplier name: ")
+        sup_phone_num = input("Enter supplier phone number: ")
+        while not validate_supplier_phone(sup_phone_num):
+            print("Invalid phone number. Please enter a 10-digit phone number.")
+            sup_phone_num = input("Enter supplier phone number: ")
+        sup_address = input("Enter supplier address: ")
+
+        supplier = Supplier(supID, sup_name, sup_phone_num, sup_address)
+        venue.add_supplier(supplier)
+
+    # Displaying venue details along with associated suppliers
+    print("\nVenue Details:")
+    print("Venue ID:", venue.get_venueID())
+    print("Venue Name:", venue.get_venue_name())
+    print("Venue Address:", venue.get_venue_address())
+    print("Venue Contact Number:", venue.get_venue_contact_num())
+    print("Minimum Guests:", venue.get_min_guests())
+    print("Maximum Guests:", venue.get_max_guests())
+
+    print("\nSuppliers:")
+    for i, supplier in enumerate(venue.get_suppliers()):
+        print(f"\nSupplier {i+1} Details:")
+        print("Supplier ID:", supplier.get_supID())
+        print("Supplier Name:", supplier.get_sup_name())
+        print("Supplier Phone Number:", supplier.get_sup_phone_num())
+        print("Supplier Address:", supplier.get_sup_address())
+
+except ValueError as e:
+    print("Error:", e)
+finally:
+    print("Execution completed.")
+
