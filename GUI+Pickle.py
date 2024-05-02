@@ -403,6 +403,48 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.add_event_window, text="Back", command=self.add_event_window.destroy)
         back_button.grid(row=6, column=1)
 
+    def delete_event(self):
+        # Create a new Toplevel window for deleting an event
+        self.delete_event_window = tk.Toplevel(self)
+        self.delete_event_window.title("Delete Event")  # Set title for the window
+
+        # Label and Entry widgets for event ID
+        tk.Label(self.delete_event_window, text="Event ID:").grid(row=0, column=0)  # Label for event ID
+        event_id_entry = tk.Entry(self.delete_event_window)  # Entry field for entering event ID
+        event_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle deletion of event
+        def delete_event_action():
+            # Get the event ID to delete
+            event_id = event_id_entry.get()  # Retrieve the event ID entered by the user
+
+            # Search for the event with the given ID
+            for event in self.events:  # Iterate through the list of events
+                if event.get_eventID() == event_id:  # Check if the event ID matches
+                    # Remove the event from the list
+                    self.events.remove(event)  # Remove the event from the list
+
+                    # Display success message
+                    messagebox.showinfo("Success", "Event deleted successfully")  # Show a success message dialog box
+
+                    # Close the Toplevel window
+                    self.delete_event_window.destroy()  # Destroy the window for deleting an event
+                    return
+
+            # If event with given ID is not found
+            messagebox.showerror("Error", "Event with the given ID not found")  # Show an error message dialog box
+
+        # Button to delete event
+        delete_button = tk.Button(
+            self.delete_event_window, text="Delete", command=delete_event_action)  # Button to trigger deletion
+        delete_button.grid(row=1, column=0)  # Positioning the delete button
+
+        # Button to go back
+        back_button = tk.Button(
+            self.delete_event_window, text="Back",
+            command=self.delete_event_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
