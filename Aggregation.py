@@ -140,6 +140,12 @@ class Venue:
     def get_max_guests(self):
         return self.__max_guests
 
+    def set_suppliers(self, suppliers):
+        self.__suppliers = suppliers
+
+    def get_suppliers(self):
+        return self.__suppliers
+
 class Supplier:
     '''Class to represent a supplier'''
     # Constructor
