@@ -533,6 +533,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                                 command=self.modify_event_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+
     def display_event(self):
         # Create a new Toplevel window for displaying an event's details
         self.display_event_window = tk.Toplevel(self)
@@ -568,6 +569,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(
             self.display_event_window, text="Back", command=self.display_event_window.destroy)
         back_button.grid(row=1, column=1)
+
 
 
 
