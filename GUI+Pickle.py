@@ -367,6 +367,42 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         venue_entry = tk.Entry(self.add_event_window)  # Entry field for entering event venue
         venue_entry.grid(row=5, column=1)  # Positioning entry field
 
+        # Function to handle submission of event details
+        def submit_event():
+            # Get values from Entry widgets
+            event_id = event_id_entry.get()  # Get event ID
+            type = type_entry.get()  # Get event type
+            date = date_entry.get()  # Get event date
+            time = time_entry.get()  # Get event time
+            duration = duration_entry.get()  # Get event duration
+            venue = venue_entry.get()  # Get event venue
+
+            # Create an instance of Event class with provided details
+            event = Event(event_id, type, date, time, duration, venue, guest_list=None)
+
+            # Add the event instance to the list
+            self.events.append(event)
+
+            # Serialize the event object and store it in a binary file
+            with open('events.pkl', 'ab') as file:
+                pickle.dump(event, file)
+
+            # Display success message
+            messagebox.showinfo("Success", "Event added successfully")
+
+            # Close the Toplevel window
+            self.add_event_window.destroy()
+            # Reset the reference to the window
+            self.add_event_window = None
+
+        # Button to submit event details
+        submit_button = tk.Button(self.add_event_window, text="Submit", command=submit_event)
+        submit_button.grid(row=6, column=0)
+
+        # Button to go back
+        back_button = tk.Button(self.add_event_window, text="Back", command=self.add_event_window.destroy)
+        back_button.grid(row=6, column=1)
+
 
 
 
