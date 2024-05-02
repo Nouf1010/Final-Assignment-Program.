@@ -533,6 +533,45 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                                 command=self.modify_event_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+    def display_event(self):
+        # Create a new Toplevel window for displaying an event's details
+        self.display_event_window = tk.Toplevel(self)
+        self.display_event_window.title("Display Event Details")
+
+        # Label and Entry widgets for event ID
+        tk.Label(self.display_event_window, text="Event ID:").grid(row=0, column=0)
+        event_id_entry = tk.Entry(self.display_event_window)
+        event_id_entry.grid(row=0, column=1)
+
+        # Function to handle displaying event details
+        def display_event_action():
+            # Get the event ID to display
+            event_id = event_id_entry.get()
+
+            # Search for the event with the given ID
+            for event in self.events:
+                if event.get_eventID() == event_id:
+                    # Display event details in a messagebox or label
+                    details = f"Type: {event.get_type()}\nDate: {event.get_date()}\nTime: {event.get_time()}\nDuration: {event.get_duration()}\nVenue: {event.get_venue()}"
+                    messagebox.showinfo("Event Details", details)
+                    return
+
+            # If event with given ID is not found
+            messagebox.showerror("Error", "Event with the given ID not found")
+
+        # Button to display event details
+        display_button = tk.Button(
+            self.display_event_window, text="Display", command=display_event_action)
+        display_button.grid(row=1, column=0)
+
+        # Button to go back
+        back_button = tk.Button(
+            self.display_event_window, text="Back", command=self.display_event_window.destroy)
+        back_button.grid(row=1, column=1)
+
+
+
+
 
 
 
