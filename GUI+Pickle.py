@@ -614,14 +614,57 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
             self.add_guest_window = None
 
         # Button to submit guest details
-        submit_button = tk.Button(
-            self.add_guest_window, text="Submit", command=submit_guest)
+        submit_button = tk.Button(self.add_guest_window, text="Submit", command=submit_guest)
         submit_button.grid(row=4, column=0)
 
         # Button to go back
-        back_button = tk.Button(
-            self.add_guest_window, text="Back", command=self.add_guest_window.destroy)
+        back_button = tk.Button(self.add_guest_window, text="Back", command=self.add_guest_window.destroy)
         back_button.grid(row=4, column=1)
+
+    def delete_guest(self):
+        # Create a new Toplevel window for deleting a guest
+        self.delete_guest_window = tk.Toplevel(self)
+        self.delete_guest_window.title("Delete Guest")
+
+        # Label and Entry widgets for guest ID
+        tk.Label(self.delete_guest_window, text="Guest ID:").grid(row=0, column=0)
+        guest_id_entry = tk.Entry(self.delete_guest_window)
+        guest_id_entry.grid(row=0, column=1)
+
+        # Function to handle deletion of guest
+        def delete_guest_action():
+            # Get the guest ID to delete
+            guest_id = guest_id_entry.get()
+
+            # Search for the guest with the given ID
+            for guest in self.guests:
+                if guest.get_guestID() == guest_id:
+                    # Remove the guest from the list
+                    self.guests.remove(guest)
+
+                    # Update the serialized file (overwrite it entirely)
+                    with open('guests.pkl', 'wb') as file:
+                        pickle.dump(self.guests, file)
+
+                    # Display success message
+                    messagebox.showinfo("Success", "Guest deleted successfully")
+
+                    # Close the Toplevel window
+                    self.delete_guest_window.destroy()
+                    return
+
+            # If guest with given ID is not found
+            messagebox.showerror("Error", "Guest with the given ID not found")
+
+        # Button to delete guest
+        delete_button = tk.Button(self.delete_guest_window, text="Delete", command=delete_guest_action)
+        delete_button.grid(row=1, column=0)
+
+        # Button to go back
+        back_button = tk.Button(self.delete_guest_window, text="Back", command=self.delete_guest_window.destroy)
+        back_button.grid(row=1, column=1)
+
+
 
 
 
