@@ -180,6 +180,49 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.add_employee_window, text="Back", command=self.add_employee_window.destroy)  # Button to close the window
         back_button.grid(row=5, column=1)  # Positioning the back button
 
+    def delete_employee(self):
+        # Create a new Toplevel window for deleting an employee
+        self.delete_employee_window = tk.Toplevel(self)
+        self.delete_employee_window.title("Delete Employee")  # Set title for the window
+
+        # Label and Entry widgets for employee ID
+        tk.Label(self.delete_employee_window, text="Employee ID:").grid(row=0, column=0)  # Label for employee ID
+        emp_id_entry = tk.Entry(self.delete_employee_window)  # Entry field for entering employee ID
+        emp_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle deletion of employee
+        def delete_employee_action():
+            # Get the employee ID to delete
+            emp_id = emp_id_entry.get()  # Retrieve the employee ID entered by the user
+
+            # Search for the employee with the given ID
+            for employee in self.employees:  # Iterate through the list of employees
+                if employee.get_empID() == emp_id:  # Check if the employee ID matches
+                    # Remove the employee from the list
+                    self.employees.remove(employee)  # Remove the employee from the list
+
+                    # Update the serialized file (you might want to overwrite it entirely)
+                    with open('employees.pkl', 'wb') as file:  # Open the file in write-binary mode
+                        pickle.dump(self.employees, file)  # Serialize and write the updated employee list to the file
+
+                    # Display success message
+                    messagebox.showinfo("Success", "Employee deleted successfully")  # Show a success message dialog box
+
+                    # Close the Toplevel window
+                    self.delete_employee_window.destroy()  # Destroy the window for deleting an employee
+                    return
+
+            # If employee with given ID is not found
+            messagebox.showerror("Error", "Employee with the given ID not found")  # Show an error message dialog box
+
+        # Button to delete employee
+        delete_button = tk.Button(self.delete_employee_window, text="Delete", command=delete_employee_action)  # Button to trigger deletion
+        delete_button.grid(row=1, column=0)  # Positioning the delete button
+
+        # Button to go back
+        back_button = tk.Button(self.delete_employee_window, text="Back", command=self.delete_employee_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
