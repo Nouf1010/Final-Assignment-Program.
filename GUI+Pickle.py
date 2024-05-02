@@ -201,7 +201,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                     # Remove the employee from the list
                     self.employees.remove(employee)  # Remove the employee from the list
 
-                    # Update the serialized file (you might want to overwrite it entirely)
+                    # Update the serialized file (overwrite it entirely)
                     with open('employees.pkl', 'wb') as file:  # Open the file in write-binary mode
                         pickle.dump(self.employees, file)  # Serialize and write the updated employee list to the file
 
@@ -335,6 +335,38 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         # Button to go back
         back_button = tk.Button(self.display_employee_window, text="Back", command=self.display_employee_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
+
+    #EVENT
+    def add_event(self):
+        # Create a new Toplevel window for adding event details
+        self.add_event_window = tk.Toplevel(self)
+        self.add_event_window.title("Add Event")  # Set title for the window
+
+        # Label and Entry widgets for event details
+        tk.Label(self.add_event_window, text="Event ID:").grid(row=0, column=0)  # Label for event ID
+        event_id_entry = tk.Entry(self.add_event_window)  # Entry field for entering event ID
+        event_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        tk.Label(self.add_event_window, text="Type:").grid(row=1, column=0)  # Label for event type
+        type_entry = tk.Entry(self.add_event_window)  # Entry field for entering event type
+        type_entry.grid(row=1, column=1)  # Positioning entry field
+
+        tk.Label(self.add_event_window, text="Date:").grid(row=2, column=0)  # Label for event date
+        date_entry = tk.Entry(self.add_event_window)  # Entry field for entering event date
+        date_entry.grid(row=2, column=1)  # Positioning entry field
+
+        tk.Label(self.add_event_window, text="Time:").grid(row=3, column=0)  # Label for event time
+        time_entry = tk.Entry(self.add_event_window)  # Entry field for entering event time
+        time_entry.grid(row=3, column=1)  # Positioning entry field
+
+        tk.Label(self.add_event_window, text="Duration:").grid(row=4, column=0)  # Label for event duration
+        duration_entry = tk.Entry(self.add_event_window)  # Entry field for entering event duration
+        duration_entry.grid(row=4, column=1)  # Positioning entry field
+
+        tk.Label(self.add_event_window, text="Venue:").grid(row=5, column=0)  # Label for event venue
+        venue_entry = tk.Entry(self.add_event_window)  # Entry field for entering event venue
+        venue_entry.grid(row=5, column=1)  # Positioning entry field
+
 
 
 
