@@ -223,6 +223,85 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.delete_employee_window, text="Back", command=self.delete_employee_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+    def modify_employee(self):
+        # Create a new Toplevel window for modifying an employee
+        self.modify_employee_window = tk.Toplevel(self)
+        self.modify_employee_window.title("Modify Employee")  # Set title for the window
+
+        # Label and Entry widgets for employee ID
+        tk.Label(self.modify_employee_window, text="Employee ID:").grid(row=0, column=0)  # Label for employee ID
+        emp_id_entry = tk.Entry(self.modify_employee_window)  # Entry field for entering employee ID
+        emp_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle modification of employee
+        def modify_employee_inner():
+            # Get the employee ID to modify
+            emp_id = emp_id_entry.get()  # Retrieve the employee ID entered by the user
+
+            # Search for the employee with the given ID
+            for employee in self.employees:  # Iterate through the list of employees
+                if employee.get_empID() == emp_id:  # Check if the employee ID matches
+                    # Open a new window to modify employee details
+                    modify_window = tk.Toplevel(self.modify_employee_window)  # Create a new window
+                    modify_window.title("Modify Employee Details")  # Set title for the new window
+
+                    # Label and Entry widgets to display current details
+                    tk.Label(modify_window, text="Name:").grid(row=0, column=0)  # Label for employee name
+                    name_entry = tk.Entry(modify_window)  # Entry field for entering employee name
+                    name_entry.insert(0, employee.get_nameP())  # Insert current name into the entry field
+                    name_entry.grid(row=0, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Phone Number:").grid(row=1, column=0)  # Label for phone number
+                    phone_entry = tk.Entry(modify_window)  # Entry field for entering phone number
+                    phone_entry.insert(0, employee.get_phone_numP())  # Insert current phone number into the entry field
+                    phone_entry.grid(row=1, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Email:").grid(row=2, column=0)  # Label for email
+                    email_entry = tk.Entry(modify_window)  # Entry field for entering email
+                    email_entry.insert(0, employee.get_emailP())  # Insert current email into the entry field
+                    email_entry.grid(row=2, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Role:").grid(row=3, column=0)  # Label for role
+                    role_entry = tk.Entry(modify_window)  # Entry field for entering role
+                    role_entry.insert(0, employee.get_role())  # Insert current role into the entry field
+                    role_entry.grid(row=3, column=1)  # Positioning entry field
+
+                    # Function to handle modification submission
+                    def submit_modification():
+                        # Update the employee object with new details
+                        employee.set_nameP(name_entry.get())  # Set new name
+                        employee.set_phone_numP(phone_entry.get())  # Set new phone number
+                        employee.set_emailP(email_entry.get())  # Set new email
+                        employee.set_role(role_entry.get())  # Set new role
+
+                        # Update the serialized file (you might want to overwrite it entirely)
+                        with open('employees.pkl', 'wb') as file:  # Open the file in write-binary mode
+                            pickle.dump(self.employees, file)  # Serialize and write the updated employee list to the file
+
+                        # Display success message
+                        messagebox.showinfo("Success","Employee details modified successfully")  # Show a success message dialog box
+
+                        # Close the modification window
+                        modify_window.destroy()  # Destroy the window for modifying employee details
+
+                    # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit", command=submit_modification)  # Button to submit modifications
+                    submit_button.grid(row=4, column=0)  # Positioning the submit button
+
+                    return
+
+            # If employee with given ID is not found
+            messagebox.showerror("Error", "Employee with the given ID not found")  # Show an error message dialog box
+
+        # Button to modify employee
+        modify_button = tk.Button(self.modify_employee_window, text="Modify", command=modify_employee_inner)  # Button to trigger modification
+        modify_button.grid(row=1, column=0)  # Positioning the modify button
+
+        # Button to go back
+        back_button = tk.Button(self.modify_employee_window, text="Back", command=self.modify_employee_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+
 
 
 
