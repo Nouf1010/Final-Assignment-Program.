@@ -118,7 +118,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         display_client_button = tk.Button(self, text="Display Client", command=self.display_client)  # Button to display client details
         display_client_button.pack()  # Adding the button to the application window
 
-
+    #EMPLOYEE
     def add_employee(self):
         # Create a new Toplevel window for adding employee details
         self.add_employee_window = tk.Toplevel(self)
@@ -301,6 +301,41 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         # Button to go back
         back_button = tk.Button(self.modify_employee_window, text="Back", command=self.modify_employee_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
+
+    def display_employee(self):
+        # Create a new Toplevel window for displaying an employee's details
+        self.display_employee_window = tk.Toplevel(self)
+        self.display_employee_window.title("Display Employee Details")  # Set title for the window
+
+        # Label and Entry widgets for employee ID
+        tk.Label(self.display_employee_window, text="Employee ID:").grid(row=0, column=0)  # Label for employee ID
+        emp_id_entry = tk.Entry(self.display_employee_window)  # Entry field for entering employee ID
+        emp_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle displaying employee details
+        def display_employee_action():
+            # Get the employee ID to display
+            emp_id = emp_id_entry.get()  # Retrieve the employee ID entered by the user
+
+            # Search for the employee with the given ID
+            for employee in self.employees:  # Iterate through the list of employees
+                if employee.get_empID() == emp_id:  # Check if the employee ID matches
+                    # Display employee details in a messagebox or label
+                    details = f"Name: {employee.get_nameP()}\nPhone: {employee.get_phone_numP()}\nEmail: {employee.get_emailP()}\nRole: {employee.get_role()}"
+                    messagebox.showinfo("Employee Details", details)  # Show a messagebox with employee details
+                    return
+
+            # If employee with given ID is not found
+            messagebox.showerror("Error", "Employee with the given ID not found")  # Show an error message dialog box
+
+        # Button to display employee details
+        display_button = tk.Button(self.display_employee_window, text="Display", command=display_employee_action)  # Button to trigger display
+        display_button.grid(row=1, column=0)  # Positioning the display button
+
+        # Button to go back
+        back_button = tk.Button(self.display_employee_window, text="Back", command=self.display_employee_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
