@@ -223,6 +223,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.delete_employee_window, text="Back", command=self.delete_employee_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+
     def modify_employee(self):
         # Create a new Toplevel window for modifying an employee
         self.modify_employee_window = tk.Toplevel(self)
@@ -300,6 +301,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         # Button to go back
         back_button = tk.Button(self.modify_employee_window, text="Back", command=self.modify_employee_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
