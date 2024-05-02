@@ -236,3 +236,125 @@ except ValueError as e:
     print("Error:", e)
 finally:
     print("Execution completed.")
+
+
+#Uni-directional (Client + Event) --> done
+
+def validate_date(date_str):
+    try:
+        day, month, year = date_str.split('/')
+        day, month, year = int(day), int(month), int(year)
+        if 1 <= day <= 31 and 1 <= month <= 12 and year >= 1000:
+            return True
+        return False
+    except ValueError:
+        return False
+
+
+def validate_time(time_str):
+    try:
+        hour, minute, period = time_str[:-6], time_str[3:-3], time_str[-2:]
+        hour, minute = int(hour), int(minute)
+        if hour < 1 or hour > 12 or minute < 0 or minute > 59 or period not in ['AM', 'PM']:
+            return False
+        return True
+    except ValueError:
+        return False
+
+try:
+    # Creating instances of Client and Event classes with user inputs
+    while True:
+        client_name = input("Enter client's name: ")
+        if not client_name.isalpha():
+            print("Name should only contain alphabetic characters.")
+        else:
+            break
+
+    while True:
+        client_phone = input("Enter client's phone number (10 digits): ")
+        if not client_phone.isdigit() or len(client_phone) != 10:
+            print("Phone number should be a 10-digit number.")
+        else:
+            break
+
+    while True:
+        client_email = input("Enter client's email: ")
+        if '@' not in client_email or '.' not in client_email:
+            print("Invalid email address.")
+        else:
+            break
+
+    while True:
+        client_ID = input("Enter client's ID: ")
+        if not client_ID:
+            print("Client ID cannot be empty.")
+        else:
+            break
+
+    while True:
+        client_budget = input("Enter client's budget: ")
+        try:
+            client_budget = float(client_budget)
+            break
+        except ValueError:
+            print("Budget should be a number.")
+
+    client = Client(client_name, client_phone, client_email, client_ID, client_budget)
+
+    while True:
+        event_ID = input("Enter event ID: ")
+        if not event_ID:
+            print("Event ID cannot be empty.")
+        else:
+            break
+
+    while True:
+        event_type = input("Enter event type (wedding, birthday, themed party, graduation): ").lower()
+        if event_type not in ["wedding", "birthday", "themed party", "graduation"]:
+            print("Invalid event type. Choose from: wedding, birthday, themed party, graduation")
+        else:
+            break
+
+    while True:
+        event_date = input("Enter event date (MM/DD/YYYY): ")
+        if not event_date or not validate_date(event_date):
+            print("Invalid date format or value. Please enter in MM/DD/YYYY format.")
+        else:
+            break
+
+    while True:
+        event_time = input("Enter event time (HH:MM AM/PM): ")
+        if not event_time or not validate_time(event_time):
+            print("Invalid time format or value. Please enter in HH:MM AM/PM format.")
+        else:
+            break
+
+    while True:
+        event_duration = input("Enter event duration (whole day or half day): ").lower()
+        if event_duration not in ["whole day", "half day"]:
+            print("Invalid duration option. Choose from: whole day, half day")
+        else:
+            break
+
+    # Creating an Event instance and associating it with the Client instance
+    event = Event(event_ID, event_type, event_date, event_time, event_duration, [])
+    event.set_client(client)
+
+    # Testing getters for Event and Client classes
+    print("\nEvent Details:")
+    print("Event ID:", event.get_eventID())
+    print("Event Type:", event.get_type())
+    print("Event Date:", event.get_date())
+    print("Event Time:", event.get_time())
+    print("Event Duration:", event.get_duration())
+    print("\nAssociated Client Details:")
+    print("Client Name:", event.get_client().get_nameP())
+    print("Client Phone:", event.get_client().get_phone_numP())
+    print("Client Email:", event.get_client().get_emailP())
+    print("Client ID:", event.get_client().get_clientID())
+    print("Client Budget:", event.get_client().get_budget())
+
+except ValueError as e:
+    print("Error:", e)
+finally:
+    print("Execution completed.")
