@@ -664,6 +664,84 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.delete_guest_window, text="Back", command=self.delete_guest_window.destroy)
         back_button.grid(row=1, column=1)
 
+    def modify_guest(self):
+        # Create a new Toplevel window for modifying a guest
+        self.modify_guest_window = tk.Toplevel(self)
+        self.modify_guest_window.title("Modify Guest")
+
+        # Label and Entry widgets for guest ID
+        tk.Label(self.modify_guest_window, text="Guest ID:").grid(row=0, column=0)
+        guest_id_entry = tk.Entry(self.modify_guest_window)
+        guest_id_entry.grid(row=0, column=1)
+
+        # Function to handle modification of a guest
+        def modify_guest_inner():
+            # Get the guest ID to modify
+            guest_id = guest_id_entry.get()  # Retrieve the guest ID entered by the user
+
+            # Search for the guest with the given ID
+            for guest in self.guests:  # Iterate through the list of guests
+                if guest.get_guestID() == guest_id:  # Check if the guest ID matches
+                    # Open a new window to modify guest details
+                    modify_window = tk.Toplevel(self.modify_guest_window)  # Create a new window
+                    modify_window.title("Modify Guest Details")  # Set title for the new window
+
+                    # Label and Entry widgets to display current details
+                    tk.Label(modify_window, text="Name:").grid(row=0, column=0)  # Label for guest name
+                    name_entry = tk.Entry(modify_window)  # Entry field for entering guest name
+                    name_entry.insert(0, guest.get_nameP())  # Insert current name into the entry field
+                    name_entry.grid(row=0, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Phone Number:").grid(row=1, column=0)  # Label for phone number
+                    phone_entry = tk.Entry(modify_window)  # Entry field for entering phone number
+                    phone_entry.insert(0, guest.get_phone_numP())  # Insert current phone number into the entry field
+                    phone_entry.grid(row=1, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Email:").grid(row=2, column=0)  # Label for email
+                    email_entry = tk.Entry(modify_window)  # Entry field for entering email
+                    email_entry.insert(0, guest.get_emailP())  # Insert current email into the entry field
+                    email_entry.grid(row=2, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Guest ID:").grid(row=3, column=0)  # Label for guest ID
+                    guest_id_entry_modify = tk.Entry(modify_window)  # Entry field for entering guest ID
+                    guest_id_entry_modify.insert(0, guest.get_guestID())  # Insert current guest ID into the entry field
+                    guest_id_entry_modify.grid(row=3, column=1)  # Positioning entry field
+
+                    # Function to handle modification submission
+                    def submit_modification():
+                        # Update the guest object with new details
+                        guest.set_nameP(name_entry.get())  # Set new name
+                        guest.set_phone_numP(phone_entry.get())  # Set new phone number
+                        guest.set_emailP(email_entry.get())  # Set new email
+                        guest.set_guestID(guest_id_entry_modify.get())  # Set new guest ID
+
+                        # Update the serialized file (you might want to overwrite it entirely)
+                        with open('guests.pkl', 'wb') as file:  # Open the file in write-binary mode
+                            pickle.dump(self.guests, file)  # Serialize and write the updated guest list to the file
+
+                        # Display success message
+                        messagebox.showinfo("Success","Guest details modified successfully")  # Show a success message dialog box
+
+                        # Close the modification window
+                        modify_window.destroy()  # Destroy the window for modifying guest details
+
+                    # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit", command=submit_modification)  # Button to submit modifications
+                    submit_button.grid(row=4, column=0)  # Positioning the submit button
+
+                    return
+
+            # If guest with given ID is not found
+            messagebox.showerror("Error", "Guest with the given ID not found")  # Show an error message dialog box
+
+        # Button to modify guest
+        modify_button = tk.Button(self.modify_guest_window, text="Modify", command=modify_guest_inner)  # Button to trigger modification
+        modify_button.grid(row=1, column=0)  # Positioning the modify button
+
+        # Button to go back
+        back_button = tk.Button(self.modify_guest_window, text="Back", command=self.modify_guest_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
