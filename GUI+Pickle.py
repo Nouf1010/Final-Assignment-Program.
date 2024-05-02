@@ -587,6 +587,45 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         guest_id_entry = tk.Entry(self.add_guest_window)
         guest_id_entry.grid(row=3, column=1)
 
+        # Function to handle submission of guest details
+        def submit_guest():
+            # Get values from Entry widgets
+            name = name_entry.get()
+            phone = phone_entry.get()
+            email = email_entry.get()
+            guest_id = guest_id_entry.get()
+
+            # Create an instance of Guest class with provided details
+            guest = Guest(name, phone, email, guest_id)
+
+            # Add the guest instance to the list
+            self.guests.append(guest)
+
+            # Serialize the guest object and store it in a binary file
+            with open('guests.pkl', 'ab') as file:
+                pickle.dump(guest, file)
+
+            # Display success message
+            messagebox.showinfo("Success", "Guest added successfully")
+
+            # Close the Toplevel window
+            self.add_guest_window.destroy()
+            # Reset the reference to the window
+            self.add_guest_window = None
+
+        # Button to submit guest details
+        submit_button = tk.Button(
+            self.add_guest_window, text="Submit", command=submit_guest)
+        submit_button.grid(row=4, column=0)
+
+        # Button to go back
+        back_button = tk.Button(
+            self.add_guest_window, text="Back", command=self.add_guest_window.destroy)
+        back_button.grid(row=4, column=1)
+
+
+
+
 
 
 
