@@ -990,6 +990,37 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
             self.display_supplier_window, text="Back", command=self.display_supplier_window.destroy)
         back_button.grid(row=1, column=1)
 
+    # VENUE
+    def add_venue(self):
+        # Create a new Toplevel window for adding venue details
+        self.add_venue_window = tk.Toplevel()
+        self.add_venue_window.title("Add Venue")  # Setting title for the window
+
+        # Label and Entry widgets for venue details
+        tk.Label(self.add_venue_window, text="Venue ID:").grid(row=0, column=0)  # Label for venue ID
+        venue_id_entry = tk.Entry(self.add_venue_window)  # Entry field for entering venue ID
+        venue_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        tk.Label(self.add_venue_window, text="Venue Name:").grid(row=1, column=0)  # Label for venue name
+        venue_name_entry = tk.Entry(self.add_venue_window)  # Entry field for entering venue name
+        venue_name_entry.grid(row=1, column=1)  # Positioning entry field
+
+        tk.Label(self.add_venue_window, text="Venue Address:").grid(row=2, column=0)  # Label for venue address
+        venue_address_entry = tk.Entry(self.add_venue_window)  # Entry field for entering venue address
+        venue_address_entry.grid(row=2, column=1)  # Positioning entry field
+
+        tk.Label(self.add_venue_window, text="Contact Number:").grid(row=3, column=0)  # Label for contact number
+        contact_num_entry = tk.Entry(self.add_venue_window)  # Entry field for entering contact number
+        contact_num_entry.grid(row=3, column=1)  # Positioning entry field
+
+        tk.Label(self.add_venue_window, text="Minimum Guests:").grid(row=4, column=0)  # Label for minimum guests
+        min_guests_entry = tk.Entry(self.add_venue_window)  # Entry field for entering minimum guests
+        min_guests_entry.grid(row=4, column=1)  # Positioning entry field
+
+        tk.Label(self.add_venue_window, text="Maximum Guests:").grid(row=5, column=0)  # Label for maximum guests
+        max_guests_entry = tk.Entry(self.add_venue_window)  # Entry field for entering maximum guests
+        max_guests_entry.grid(row=5, column=1)  # Positioning entry field
+
 
 
 
