@@ -1189,6 +1189,46 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button.grid(row=1, column=1)  # Positioning the back button
 
 
+    def display_venue(self):
+        # Create a new Toplevel window for displaying venue details
+        self.display_venue_window = tk.Toplevel()
+        self.display_venue_window.title("Display Venue Details")  # Set title for the window
+
+        # Label and Entry widgets for venue ID
+        tk.Label(self.display_venue_window, text="Venue ID:").grid(row=0, column=0)  # Label for venue ID
+        venue_id_entry = tk.Entry(self.display_venue_window)  # Entry field for entering venue ID
+        venue_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle displaying venue details
+        def display_venue_action():
+            # Get the venue ID to display
+            venue_id = venue_id_entry.get()  # Retrieve the venue ID entered by the user
+
+            # Search for the venue with the given ID
+            # Assuming self.venues is the list holding Venue objects
+            for venue in self.venues:  # Iterate through the list of venues
+                if venue.get_venueID() == venue_id:  # Check if the venue ID matches
+                    # Display venue details in a messagebox or label
+                    details = f"Name: {venue.get_venue_name()}\nAddress: {venue.get_venue_address()}\nContact Number: {venue.get_venue_contact_num()}\nMin Guests: {venue.get_min_guests()}\nMax Guests: {venue.get_max_guests()}"
+                    messagebox.showinfo("Venue Details", details)  # Show a messagebox with venue details
+                    return
+
+            # If venue with given ID is not found
+            messagebox.showerror("Error", "Venue with the given ID not found")  # Show an error message dialog box
+
+        # Button to display venue details
+        display_button = tk.Button(self.display_venue_window, text="Display",
+                                   command=display_venue_action)  # Button to trigger display
+        display_button.grid(row=1, column=0)  # Positioning the display button
+
+        # Button to go back
+        back_button = tk.Button(self.display_venue_window, text="Back",
+                                command=self.display_venue_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+
+
+
 
 
 
