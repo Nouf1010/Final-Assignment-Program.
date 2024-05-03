@@ -1103,6 +1103,91 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.delete_venue_window, text="Back", command=self.delete_venue_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+    def modify_venue(self):
+        # Create a new Toplevel window for modifying a venue
+        self.modify_venue_window = tk.Toplevel(self)
+        self.modify_venue_window.title("Modify Venue")
+
+        # Label and Entry widgets for venue ID
+        tk.Label(self.modify_venue_window, text="Venue ID:").grid(row=0, column=0)
+        venue_id_entry = tk.Entry(self.modify_venue_window)
+        venue_id_entry.grid(row=0, column=1)
+
+        # Function to handle modification of a venue
+        def modify_venue_inner():
+            # Get the venue ID to modify
+            venue_id = venue_id_entry.get()  # Retrieve the venue ID entered by the user
+
+            # Search for the venue with the given ID
+            for venue in self.venues:  # Iterate through the list of venues
+                if venue.get_venueID() == venue_id:  # Check if the venue ID matches
+                    # Open a new window to modify venue details
+                    modify_window = tk.Toplevel(self.modify_venue_window)  # Create a new window
+                    modify_window.title("Modify Venue Details")  # Set title for the new window
+
+                    # Label and Entry widgets to display current details
+                    tk.Label(modify_window, text="Venue Name:").grid(row=0, column=0)  # Label for venue name
+                    name_entry = tk.Entry(modify_window)  # Entry field for entering venue name
+                    name_entry.insert(0, venue.get_venue_name())  # Insert current name into the entry field
+                    name_entry.grid(row=0, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Address:").grid(row=1, column=0)  # Label for address
+                    address_entry = tk.Entry(modify_window)  # Entry field for entering address
+                    address_entry.insert(0, venue.get_venue_address())  # Insert current address into the entry field
+                    address_entry.grid(row=1, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Contact Number:").grid(row=2, column=0)  # Label for contact number
+                    contact_entry = tk.Entry(modify_window)  # Entry field for entering contact number
+                    contact_entry.insert(0,
+                                         venue.get_venue_contact_num())  # Insert current contact number into the entry field
+                    contact_entry.grid(row=2, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Min Guests:").grid(row=3, column=0)  # Label for min guests
+                    min_guests_entry = tk.Entry(modify_window)  # Entry field for entering min guests
+                    min_guests_entry.insert(0, venue.get_min_guests())  # Insert current min guests into the entry field
+                    min_guests_entry.grid(row=3, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Max Guests:").grid(row=4, column=0)  # Label for max guests
+                    max_guests_entry = tk.Entry(modify_window)  # Entry field for entering max guests
+                    max_guests_entry.insert(0, venue.get_max_guests())  # Insert current max guests into the entry field
+                    max_guests_entry.grid(row=4, column=1)  # Positioning entry field
+
+                    # Function to handle modification submission
+                    def submit_modification():
+                        # Update the venue object with new details
+                        venue.set_venue_name(name_entry.get())  # Set new venue name
+                        venue.set_venue_address(address_entry.get())  # Set new address
+                        venue.set_venue_contact_num(contact_entry.get())  # Set new contact number
+                        venue.set_min_guests(min_guests_entry.get())  # Set new min guests
+                        venue.set_max_guests(max_guests_entry.get())  # Set new max guests
+
+                        # Display success message
+                        messagebox.showinfo("Success",
+                                            "Venue details modified successfully")  # Show a success message dialog box
+
+                        # Close the modification window
+                        modify_window.destroy()  # Destroy the window for modifying venue details
+
+                    # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit",
+                                              command=submit_modification)  # Button to submit modifications
+                    submit_button.grid(row=6, column=0)  # Positioning the submit button
+
+                    return
+
+            # If venue with given ID is not found
+            messagebox.showerror("Error", "Venue with the given ID not found")  # Show an error message dialog box
+
+        # Button to modify venue
+        modify_button = tk.Button(self.modify_venue_window, text="Modify",
+                                  command=modify_venue_inner)  # Button to trigger modification
+        modify_button.grid(row=1, column=0)  # Positioning the modify button
+
+        # Button to go back
+        back_button = tk.Button(self.modify_venue_window, text="Back",
+                                command=self.modify_venue_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
 
 
 
