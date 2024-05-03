@@ -201,7 +201,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                     # Remove the employee from the list
                     self.employees.remove(employee)  # Remove the employee from the list
 
-                    # Update the serialized file (overwrite it entirely)
+                    # Update the serialized file
                     with open('employees.pkl', 'wb') as file:  # Open the file in write-binary mode
                         pickle.dump(self.employees, file)  # Serialize and write the updated employee list to the file
 
@@ -275,7 +275,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                         employee.set_emailP(email_entry.get())  # Set new email
                         employee.set_role(role_entry.get())  # Set new role
 
-                        # Update the serialized file (you might want to overwrite it entirely)
+                        # Update the serialized file
                         with open('employees.pkl', 'wb') as file:  # Open the file in write-binary mode
                             pickle.dump(self.employees, file)  # Serialize and write the updated employee list to the file
 
@@ -502,7 +502,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                         event.set_duration(duration_entry.get())  # Set new duration
                         event.set_venue(venue_entry.get())  # Set new venue
 
-                        # Update the serialized file (you might want to overwrite it entirely)
+                        # Update the serialized file
                         with open('events.pkl', 'wb') as file:  # Open the file in write-binary mode
                             pickle.dump(self.events, file)  # Serialize and write the updated event list to the file
 
@@ -715,7 +715,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                         guest.set_emailP(email_entry.get())  # Set new email
                         guest.set_guestID(guest_id_entry_modify.get())  # Set new guest ID
 
-                        # Update the serialized file (you might want to overwrite it entirely)
+                        # Update the serialized file
                         with open('guests.pkl', 'wb') as file:  # Open the file in write-binary mode
                             pickle.dump(self.guests, file)  # Serialize and write the updated guest list to the file
 
