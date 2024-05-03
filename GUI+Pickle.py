@@ -742,6 +742,43 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.modify_guest_window, text="Back", command=self.modify_guest_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+    def display_guest(self):
+        # Create a new Toplevel window for displaying a guest's details
+        self.display_guest_window = tk.Toplevel(self)
+        self.display_guest_window.title("Display Guest Details")
+
+        # Label and Entry widgets for guest ID
+        tk.Label(self.display_guest_window, text="Guest ID:").grid(row=0, column=0)
+        guest_id_entry = tk.Entry(self.display_guest_window)
+        guest_id_entry.grid(row=0, column=1)
+
+        # Function to handle displaying guest details
+        def display_guest_action():
+            # Get the guest ID to display
+            guest_id = guest_id_entry.get()
+
+            # Search for the guest with the given ID
+            for guest in self.guests:
+                if guest.get_guestID() == guest_id:
+                    # Display guest details in a messagebox or label
+                    details = f"Name: {guest.get_nameP()}\nPhone: {guest.get_phone_numP()}\nEmail: {guest.get_emailP()}"
+                    messagebox.showinfo("Guest Details", details)
+                    return
+
+            # If guest with given ID is not found
+            messagebox.showerror("Error", "Guest with the given ID not found")
+
+        # Button to display guest details
+        display_button = tk.Button(
+            self.display_guest_window, text="Display", command=display_guest_action)
+        display_button.grid(row=1, column=0)
+
+        # Button to go back
+        back_button = tk.Button(
+            self.display_guest_window, text="Back", command=self.display_guest_window.destroy)
+        back_button.grid(row=1, column=1)
+
+
 
 
 
