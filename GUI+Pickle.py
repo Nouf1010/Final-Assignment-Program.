@@ -1254,6 +1254,43 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         budget_entry = tk.Entry(self.add_client_window)  # Entry field for entering budget
         budget_entry.grid(row=4, column=1)  # Positioning entry field
 
+        # Function to handle submission of client details
+        def submit_client():
+            # Get values from Entry widgets
+            name = name_entry.get()  # Retrieve the name entered by the user
+            phone = phone_entry.get()  # Retrieve the phone number entered by the user
+            email = email_entry.get()  # Retrieve the email entered by the user
+            client_id = client_id_entry.get()  # Retrieve the client ID entered by the user
+            budget = budget_entry.get()  # Retrieve the budget entered by the user
+
+            # Create an instance of Client class with provided details
+            client = Client(name, phone, email, client_id, budget)  # Create a Client object
+
+            # Add the client instance to the list
+            self.clients.append(client)  # Append the new client to the list of clients
+
+            # Serialize the client object and store it in a binary file
+            with open('clients.pkl', 'ab') as file:  # Open the file in binary append mode
+                pickle.dump(client, file)  # Serialize and write the client object to the file
+
+            # Display success message
+            messagebox.showinfo("Success", "Client added successfully")  # Show a success message dialog box
+
+            # Close the Toplevel window
+            self.add_client_window.destroy()  # Destroy the window for adding a client
+            # Reset the reference to the window
+            self.add_client_window = None  # Set the window reference to None to indicate it's closed
+
+        # Button to submit client details
+        submit_button = tk.Button(self.add_client_window, text="Submit",
+                                  command=submit_client)  # Button to submit client details
+        submit_button.grid(row=5, column=0)  # Positioning the submit button
+
+        # Button to go back
+        back_button = tk.Button(self.add_client_window, text="Back",
+                                command=self.add_client_window.destroy)  # Button to close the window
+        back_button.grid(row=5, column=1)  # Positioning the back button
+
 
 
 
