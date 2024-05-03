@@ -778,6 +778,30 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
             self.display_guest_window, text="Back", command=self.display_guest_window.destroy)
         back_button.grid(row=1, column=1)
 
+    #SUPPLIER
+    def add_supplier(self):
+        # Create a new Toplevel window for adding supplier details
+        self.add_supplier_window = tk.Toplevel(self)
+        self.add_supplier_window.title("Add Supplier")
+
+        # Label and Entry widgets for supplier details
+        tk.Label(self.add_supplier_window, text="Supplier ID:").grid(row=0, column=0)
+        sup_id_entry = tk.Entry(self.add_supplier_window)
+        sup_id_entry.grid(row=0, column=1)
+
+        tk.Label(self.add_supplier_window, text="Name:").grid(row=1, column=0)
+        name_entry = tk.Entry(self.add_supplier_window)
+        name_entry.grid(row=1, column=1)
+
+        tk.Label(self.add_supplier_window, text="Phone Number:").grid(row=2, column=0)
+        phone_entry = tk.Entry(self.add_supplier_window)
+        phone_entry.grid(row=2, column=1)
+
+        tk.Label(self.add_supplier_window, text="Address:").grid(row=3, column=0)
+        address_entry = tk.Entry(self.add_supplier_window)
+        address_entry.grid(row=3, column=1)
+
+
 
 
 
