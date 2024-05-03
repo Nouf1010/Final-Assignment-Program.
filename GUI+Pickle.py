@@ -1227,6 +1227,34 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button.grid(row=1, column=1)  # Positioning the back button
 
 
+    # CLIENT
+    def add_client(self):
+        # Create a new Toplevel window for adding client details
+        self.add_client_window = tk.Toplevel()
+        self.add_client_window.title("Add Client")  # Setting title for the window
+
+        # Label and Entry widgets for client details
+        tk.Label(self.add_client_window, text="Name:").grid(row=0, column=0)  # Label for client name
+        name_entry = tk.Entry(self.add_client_window)  # Entry field for entering client name
+        name_entry.grid(row=0, column=1)  # Positioning entry field
+
+        tk.Label(self.add_client_window, text="Phone Number:").grid(row=1, column=0)  # Label for phone number
+        phone_entry = tk.Entry(self.add_client_window)  # Entry field for entering phone number
+        phone_entry.grid(row=1, column=1)  # Positioning entry field
+
+        tk.Label(self.add_client_window, text="Email:").grid(row=2, column=0)  # Label for email
+        email_entry = tk.Entry(self.add_client_window)  # Entry field for entering email
+        email_entry.grid(row=2, column=1)  # Positioning entry field
+
+        tk.Label(self.add_client_window, text="Client ID:").grid(row=3, column=0)  # Label for client ID
+        client_id_entry = tk.Entry(self.add_client_window)  # Entry field for entering client ID
+        client_id_entry.grid(row=3, column=1)  # Positioning entry field
+
+        tk.Label(self.add_client_window, text="Budget:").grid(row=4, column=0)  # Label for budget
+        budget_entry = tk.Entry(self.add_client_window)  # Entry field for entering budget
+        budget_entry.grid(row=4, column=1)  # Positioning entry field
+
+
 
 
 
