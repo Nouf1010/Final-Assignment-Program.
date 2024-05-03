@@ -1338,6 +1338,122 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                                 command=self.delete_client_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
 
+    def modify_client(self):
+        # Create a new Toplevel window for modifying a client
+        self.modify_client_window = tk.Toplevel(self)
+        self.modify_client_window.title("Modify Client")
+
+        # Label and Entry widgets for client ID
+        tk.Label(self.modify_client_window, text="Client ID:").grid(row=0, column=0)
+        client_id_entry = tk.Entry(self.modify_client_window)
+        client_id_entry.grid(row=0, column=1)
+
+        # Function to handle modification of a client
+        def modify_client_inner():
+            # Get the client ID to modify
+            client_id = client_id_entry.get()  # Retrieve the client ID entered by the user
+
+            # Search for the client with the given ID
+            for client in self.clients:  # Iterate through the list of clients
+                if client.get_clientID() == client_id:  # Check if the client ID matches
+                    # Open a new window to modify client details
+                    modify_window = tk.Toplevel(self.modify_client_window)  # Create a new window
+                    modify_window.title("Modify Client Details")  # Set title for the new window
+
+                    # Label and Entry widgets to display current details
+                    tk.Label(modify_window, text="Client Name:").grid(row=0, column=0)  # Label for client name
+                    name_entry = tk.Entry(modify_window)  # Entry field for entering client name
+                    name_entry.insert(0, client.get_nameP())  # Insert current name into the entry field
+                    name_entry.grid(row=0, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Phone Number:").grid(row=1, column=0)  # Label for phone number
+                    phone_entry = tk.Entry(modify_window)  # Entry field for entering phone number
+                    phone_entry.insert(0, client.get_phone_numP())  # Insert current phone number into the entry field
+                    phone_entry.grid(row=1, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Email:").grid(row=2, column=0)  # Label for email
+                    email_entry = tk.Entry(modify_window)  # Entry field for entering email
+                    email_entry.insert(0, client.get_emailP())  # Insert current email into the entry field
+                    email_entry.grid(row=2, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Budget:").grid(row=3, column=0)  # Label for budget
+                    budget_entry = tk.Entry(modify_window)  # Entry field for entering budget
+                    budget_entry.insert(0, client.get_budget())  # Insert current budget into the entry field
+                    budget_entry.grid(row=3, column=1)  # Positioning entry field
+
+                    # Function to handle modification submission
+                    def submit_modification():
+                        # Update the client object with new details
+                        client.set_nameP(name_entry.get())  # Set new client name
+                        client.set_phone_numP(phone_entry.get())  # Set new phone number
+                        client.set_emailP(email_entry.get())  # Set new email
+                        client.set_budget(budget_entry.get())  # Set new budget
+
+                        # Display success message
+                        messagebox.showinfo("Success",
+                                            "Client details modified successfully")  # Show a success message dialog box
+
+                        # Close the modification window
+                        modify_window.destroy()  # Destroy the window for modifying client details
+
+                    # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit",
+                                              command=submit_modification)  # Button to submit modifications
+                    submit_button.grid(row=4, column=0)  # Positioning the submit button
+
+                    return
+
+            # If client with given ID is not found
+            messagebox.showerror("Error", "Client with the given ID not found")  # Show an error message dialog box
+
+        # Button to modify client
+        modify_button = tk.Button(self.modify_client_window, text="Modify",
+                                  command=modify_client_inner)  # Button to trigger modification
+        modify_button.grid(row=1, column=0)  # Positioning the modify button
+
+        # Button to go back
+        back_button = tk.Button(self.modify_client_window, text="Back",
+                                command=self.modify_client_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+    def display_client(self):
+        # Create a new Toplevel window for displaying client details
+        self.display_client_window = tk.Toplevel()
+        self.display_client_window.title("Display Client Details")  # Set title for the window
+
+        # Label and Entry widgets for client ID
+        tk.Label(self.display_client_window, text="Client ID:").grid(row=0, column=0)  # Label for client ID
+        client_id_entry = tk.Entry(self.display_client_window)  # Entry field for entering client ID
+        client_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle displaying client details
+        def display_client_action():
+            # Get the client ID to display
+            client_id = client_id_entry.get()  # Retrieve the client ID entered by the user
+
+            # Search for the client with the given ID
+            # Assuming self.clients is the list holding Client objects
+            for client in self.clients:  # Iterate through the list of clients
+                if client.get_clientID() == client_id:  # Check if the client ID matches
+                    # Display client details in a messagebox or label
+                    details = f"Name: {client.get_nameP()}\nPhone: {client.get_phone_numP()}\nEmail: {client.get_emailP()}\nBudget: {client.get_budget()}"
+                    messagebox.showinfo("Client Details", details)  # Show a messagebox with client details
+                    return
+
+            # If client with given ID is not found
+            messagebox.showerror("Error", "Client with the given ID not found")  # Show an error message dialog box
+
+        # Button to display client details
+        display_button = tk.Button(self.display_client_window, text="Display",
+                                   command=display_client_action)  # Button to trigger display
+        display_button.grid(row=1, column=0)  # Positioning the display button
+
+        # Button to go back
+        back_button = tk.Button(self.display_client_window, text="Back",
+                                command=self.display_client_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+
 
 
 
