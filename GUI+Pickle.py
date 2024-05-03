@@ -12,7 +12,7 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
     def __init__(self):  # Constructor method for the class
         super().__init__()  # Calling the constructor of the superclass
         self.title("Event Management System")  # Setting the title of the application window
-        self.geometry("600x400")  # Setting the initial size of the application window
+        self.geometry("400x700")  # Setting the initial size of the application window
 
         # Create lists to store different types of data
         self.employees = []  # List to store employee data
@@ -1452,6 +1452,21 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         back_button = tk.Button(self.display_client_window, text="Back",
                                 command=self.display_client_window.destroy)  # Button to close the window
         back_button.grid(row=1, column=1)  # Positioning the back button
+
+    def run(self):
+        # Start the main event loop of the tkinter application
+        self.mainloop() # This method keeps the application running and handles user events.
+
+# Check if the script is being executed directly by the Python interpreter
+if __name__ == "__main__":
+
+    # Create an instance of the Application class
+    app = Application()
+
+    # Run the main event loop of the application
+    app.run()
+
+
 
 
 
