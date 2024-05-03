@@ -1059,6 +1059,52 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                                 command=self.add_venue_window.destroy)  # Button to close the window
         back_button.grid(row=6, column=1)  # Positioning the back button
 
+    def delete_venue(self):
+        # Create a new Toplevel window for deleting a venue
+        self.delete_venue_window = tk.Toplevel()
+        self.delete_venue_window.title("Delete Venue")  # Set title for the window
+
+        # Label and Entry widgets for venue ID
+        tk.Label(self.delete_venue_window, text="Venue ID:").grid(row=0, column=0)  # Label for venue ID
+        venue_id_entry = tk.Entry(self.delete_venue_window)  # Entry field for entering venue ID
+        venue_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle deletion of venue
+        def delete_venue_action():
+            # Get the venue ID to delete
+            venue_id = venue_id_entry.get()  # Retrieve the venue ID entered by the user
+
+            # Search for the venue with the given ID
+            # Assuming self.venues is the list holding Venue objects
+            for venue in self.venues:  # Iterate through the list of venues
+                if venue.get_venueID() == venue_id:  # Check if the venue ID matches
+                    # Remove the venue from the list
+                    self.venues.remove(venue)  # Remove the venue from the list
+
+                    # Serialize the updated venue list and store it in a binary file
+                    with open('venues.pkl', 'wb') as file:  # Open the file in write-binary mode
+                        pickle.dump(self.venues, file)  # Serialize and write the updated venue list to the file
+
+                    # Display success message
+                    messagebox.showinfo("Success","Venue deleted successfully")  # Show a success message dialog box
+
+                    # Close the Toplevel window
+                    self.delete_venue_window.destroy()  # Destroy the window for deleting a venue
+                    return
+
+            # If venue with given ID is not found
+            messagebox.showerror("Error", "Venue with the given ID not found")  # Show an error message dialog box
+
+        # Button to delete venue
+        delete_button = tk.Button(self.delete_venue_window, text="Delete", command=delete_venue_action)  # Button to trigger deletion
+        delete_button.grid(row=1, column=0)  # Positioning the delete button
+
+        # Button to go back
+        back_button = tk.Button(self.delete_venue_window, text="Back", command=self.delete_venue_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+
+
 
 
 
