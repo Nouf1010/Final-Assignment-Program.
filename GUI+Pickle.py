@@ -1021,6 +1021,44 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         max_guests_entry = tk.Entry(self.add_venue_window)  # Entry field for entering maximum guests
         max_guests_entry.grid(row=5, column=1)  # Positioning entry field
 
+        def submit_venue():
+            # Get values from Entry widgets
+            venueID = venue_id_entry.get()  # Retrieve the venue id entered by the user
+            venue_name = venue_name_entry.get()  # Retrieve the venue name entered by the user
+            venue_address = venue_address_entry.get()  # Retrieve the venue address entered by the user
+            venue_contact_num = contact_num_entry.get()  # Retrieve the contact number entered by the user
+            min_guests = min_guests_entry.get()  # Retrieve the minimum guests entered by the user
+            max_guests = max_guests_entry.get()  # Retrieve the maximum guests entered by the user
+
+            # Create an instance of Venue class with provided details
+            venue = Venue(venueID, venue_name, venue_address, venue_contact_num, min_guests,
+                          max_guests)  # Create a Venue object
+
+            # Add the venue instance to the list
+            self.venues.append(venue)  # Append the new venue to the list of venues
+
+            # Serialize the venue object and store it in a binary file
+            with open('venues.pkl', 'ab') as file:  # Open the file in binary append mode
+                pickle.dump(venue, file)  # Serialize and write the venue object to the file
+
+            # Display success message
+            messagebox.showinfo("Success", "Venue added successfully")  # Show a success message dialog box
+
+            # Close the Toplevel window
+            self.add_venue_window.destroy()  # Destroy the window for adding a venue
+            # Reset the reference to the window
+            self.add_venue_window = None  # Set the window reference to None to indicate it's closed
+
+        # Button to submit venue details
+        submit_button = tk.Button(self.add_venue_window, text="Submit",
+                                  command=submit_venue)  # Button to submit venue details
+        submit_button.grid(row=6, column=0)  # Positioning the submit button
+
+        # Button to go back
+        back_button = tk.Button(self.add_venue_window, text="Back",
+                                command=self.add_venue_window.destroy)  # Button to close the window
+        back_button.grid(row=6, column=1)  # Positioning the back button
+
 
 
 
