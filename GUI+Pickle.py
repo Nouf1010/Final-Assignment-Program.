@@ -802,6 +802,195 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
         address_entry.grid(row=3, column=1)
 
 
+        # Function to handle submission of supplier details
+        def submit_supplier():
+            # Get values from Entry widgets
+            sup_id = sup_id_entry.get()
+            name = name_entry.get()
+            phone = phone_entry.get()
+            address = address_entry.get()
+
+            # Create an instance of Supplier class with provided details
+            new_supplier = Supplier(sup_id, name, phone, address)
+
+            # Add the supplier instance to the list
+            self.suppliers.append(new_supplier)
+
+            # Serialize the supplier object and store it in a binary file
+            with open('suppliers.pkl', 'ab') as file:
+                pickle.dump(new_supplier, file)
+
+            # Display success message
+            messagebox.showinfo("Success", "Supplier added successfully")
+
+            # Close the Toplevel window
+            self.add_supplier_window.destroy()
+            # Reset the reference to the window
+            self.add_supplier_window = None
+
+        # Button to submit supplier details
+        submit_button = tk.Button(
+            self.add_supplier_window, text="Submit", command=submit_supplier)
+        submit_button.grid(row=7, column=0)
+
+        # Button to go back
+        back_button = tk.Button(
+            self.add_supplier_window, text="Back", command=self.add_supplier_window.destroy)
+        back_button.grid(row=7, column=1)
+
+    def delete_supplier(self):
+        # Create a new Toplevel window for deleting a supplier
+        self.delete_supplier_window = tk.Toplevel(self)
+        self.delete_supplier_window.title("Delete Supplier")
+
+        # Label and Entry widgets for supplier ID
+        tk.Label(self.delete_supplier_window, text="Supplier ID:").grid(row=0, column=0)
+        sup_id_entry = tk.Entry(self.delete_supplier_window)
+        sup_id_entry.grid(row=0, column=1)
+
+        # Function to handle deletion of supplier
+        def delete_supplier_action():
+            # Get the supplier ID to delete
+            sup_id = sup_id_entry.get()
+
+            # Search for the supplier with the given ID
+            for supplier in self.suppliers:
+                if supplier.get_supID() == sup_id:
+                    # Remove the supplier from the list
+                    self.suppliers.remove(supplier)
+
+                    # Update the serialized file (overwrite it entirely)
+                    with open('suppliers.pkl', 'wb') as file:
+                        pickle.dump(self.suppliers, file)
+
+                    # Display success message
+                    messagebox.showinfo("Success", "Supplier deleted successfully")
+
+                    # Close the Toplevel window
+                    self.delete_supplier_window.destroy()
+                    return
+
+            # If supplier with given ID is not found
+            messagebox.showerror("Error", "Supplier with the given ID not found")
+
+        # Button to delete supplier
+        delete_button = tk.Button(self.delete_supplier_window, text="Delete", command=delete_supplier_action)
+        delete_button.grid(row=1, column=0)
+
+        # Button to go back
+        back_button = tk.Button(self.delete_supplier_window, text="Back", command=self.delete_supplier_window.destroy)
+        back_button.grid(row=1, column=1)
+
+    def modify_supplier(self):
+        # Create a new Toplevel window for modifying a supplier
+        self.modify_supplier_window = tk.Toplevel(self)
+        self.modify_supplier_window.title("Modify Supplier")
+
+        # Label and Entry widgets for supplier ID
+        tk.Label(self.modify_supplier_window, text="Supplier ID:").grid(row=0, column=0)
+        sup_id_entry = tk.Entry(self.modify_supplier_window)
+        sup_id_entry.grid(row=0, column=1)
+
+        # Function to handle modification of a supplier
+        def modify_supplier_inner():
+            # Get the supplier ID to modify
+            sup_id = sup_id_entry.get()  # Retrieve the supplier ID entered by the user
+
+            # Search for the supplier with the given ID
+            for supplier in self.suppliers:  # Iterate through the list of suppliers
+                if supplier.get_supID() == sup_id:  # Check if the supplier ID matches
+                    # Open a new window to modify supplier details
+                    modify_window = tk.Toplevel(self.modify_supplier_window)  # Create a new window
+                    modify_window.title("Modify Supplier Details")  # Set title for the new window
+
+                    # Label and Entry widgets to display current details
+                    tk.Label(modify_window, text="Supplier Name:").grid(row=0, column=0)  # Label for supplier name
+                    name_entry = tk.Entry(modify_window)  # Entry field for entering supplier name
+                    name_entry.insert(0, supplier.get_sup_name())  # Insert current name into the entry field
+                    name_entry.grid(row=0, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Phone Number:").grid(row=1, column=0)  # Label for phone number
+                    phone_entry = tk.Entry(modify_window)  # Entry field for entering phone number
+                    phone_entry.insert(0,
+                                       supplier.get_sup_phone_num())  # Insert current phone number into the entry field
+                    phone_entry.grid(row=1, column=1)  # Positioning entry field
+
+                    tk.Label(modify_window, text="Address:").grid(row=2, column=0)  # Label for address
+                    address_entry = tk.Entry(modify_window)  # Entry field for entering address
+                    address_entry.insert(0, supplier.get_sup_address())  # Insert current address into the entry field
+                    address_entry.grid(row=2, column=1)  # Positioning entry field
+
+                    # Function to handle modification submission
+                    def submit_modification():
+                        # Update the supplier object with new details
+                        supplier.set_sup_name(name_entry.get())  # Set new supplier name
+                        supplier.set_sup_phone_num(phone_entry.get())  # Set new phone number
+                        supplier.set_sup_address(address_entry.get())  # Set new address
+
+                        # Display success message
+                        messagebox.showinfo("Success",
+                                            "Supplier details modified successfully")  # Show a success message dialog box
+
+                        # Close the modification window
+                        modify_window.destroy()  # Destroy the window for modifying supplier details
+
+                    # Button to submit modifications
+                    submit_button = tk.Button(modify_window, text="Submit",
+                                              command=submit_modification)  # Button to submit modifications
+                    submit_button.grid(row=3, column=0)  # Positioning the submit button
+
+                    return
+
+            # If supplier with given ID is not found
+            messagebox.showerror("Error", "Supplier with the given ID not found")  # Show an error message dialog box
+
+        # Button to modify supplier
+        modify_button = tk.Button(self.modify_supplier_window, text="Modify",
+                                  command=modify_supplier_inner)  # Button to trigger modification
+        modify_button.grid(row=1, column=0)  # Positioning the modify button
+
+        # Button to go back
+        back_button = tk.Button(self.modify_supplier_window, text="Back",
+                                command=self.modify_supplier_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+    def display_supplier(self):
+        # Create a new Toplevel window for displaying a supplier's details
+        self.display_supplier_window = tk.Toplevel(self)
+        self.display_supplier_window.title("Display Supplier Details")
+
+        # Label and Entry widgets for supplier ID
+        tk.Label(self.display_supplier_window, text="Supplier ID:").grid(row=0, column=0)
+        sup_id_entry = tk.Entry(self.display_supplier_window)
+        sup_id_entry.grid(row=0, column=1)
+
+        # Function to handle displaying supplier details
+        def display_supplier_action():
+            # Get the supplier ID to display
+            sup_id = sup_id_entry.get()
+
+            # Search for the supplier with the given ID
+            for supplier in self.suppliers:
+                if supplier.get_supID() == sup_id:
+                    # Display supplier details in a messagebox or label
+                    details = f"Name: {supplier.get_sup_name()}\nPhone: {supplier.get_sup_phone_num()}\nAddress: {supplier.get_sup_address()}"
+                    messagebox.showinfo("Supplier Details", details)
+                    return
+
+            # If supplier with given ID is not found
+            messagebox.showerror("Error", "Supplier with the given ID not found")
+
+        # Button to display supplier details
+        display_button = tk.Button(
+            self.display_supplier_window, text="Display", command=display_supplier_action)
+        display_button.grid(row=1, column=0)
+
+        # Button to go back
+        back_button = tk.Button(
+            self.display_supplier_window, text="Back", command=self.display_supplier_window.destroy)
+        back_button.grid(row=1, column=1)
+
+
 
 
 
