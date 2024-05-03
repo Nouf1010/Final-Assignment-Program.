@@ -1291,6 +1291,55 @@ class Application(tk.Tk):  # Define a class 'Application' inheriting from 'tk.Tk
                                 command=self.add_client_window.destroy)  # Button to close the window
         back_button.grid(row=5, column=1)  # Positioning the back button
 
+    def delete_client(self):
+        # Create a new Toplevel window for deleting a client
+        self.delete_client_window = tk.Toplevel()
+        self.delete_client_window.title("Delete Client")  # Set title for the window
+
+        # Label and Entry widgets for client ID
+        tk.Label(self.delete_client_window, text="Client ID:").grid(row=0, column=0)  # Label for client ID
+        client_id_entry = tk.Entry(self.delete_client_window)  # Entry field for entering client ID
+        client_id_entry.grid(row=0, column=1)  # Positioning entry field
+
+        # Function to handle deletion of client
+        def delete_client_action():
+            # Get the client ID to delete
+            client_id = client_id_entry.get()  # Retrieve the client ID entered by the user
+
+            # Search for the client with the given ID
+            # Assuming self.clients is the list holding Client objects
+            for client in self.clients:  # Iterate through the list of clients
+                if client.get_clientID() == client_id:  # Check if the client ID matches
+                    # Remove the client from the list
+                    self.clients.remove(client)  # Remove the client from the list
+
+                    # Serialize the updated client list and store it in a binary file
+                    with open('clients.pkl', 'wb') as file:  # Open the file in write-binary mode
+                        pickle.dump(self.clients, file)  # Serialize and write the updated client list to the file
+
+                    # Display success message
+                    messagebox.showinfo("Success",
+                                        "Client deleted successfully")  # Show a success message dialog box
+
+                    # Close the Toplevel window
+                    self.delete_client_window.destroy()  # Destroy the window for deleting a client
+                    return
+
+            # If client with given ID is not found
+            messagebox.showerror("Error", "Client with the given ID not found")  # Show an error message dialog box
+
+        # Button to delete client
+        delete_button = tk.Button(self.delete_client_window, text="Delete",
+                                  command=delete_client_action)  # Button to trigger deletion
+        delete_button.grid(row=1, column=0)  # Positioning the delete button
+
+        # Button to go back
+        back_button = tk.Button(self.delete_client_window, text="Back",
+                                command=self.delete_client_window.destroy)  # Button to close the window
+        back_button.grid(row=1, column=1)  # Positioning the back button
+
+
+
 
 
 
